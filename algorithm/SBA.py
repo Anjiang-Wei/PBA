@@ -78,7 +78,7 @@ def minimal_BER(sigma_start, sigma_end, sigma_delta):
     while sigma_start <= sigma_end:
         levels = level_inference(sigma_start)
         num_level = len(levels)
-        print(f"Solved for {num_level}")
+        # print(f"Solved for {num_level}")
         if num_level not in res.keys():
             res[num_level] = levels
         sigma_start += sigma_delta

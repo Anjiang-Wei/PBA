@@ -61,7 +61,7 @@ def refine(level_alloc):
     --> [2, 15, 0, 4], [15, 30, 16, 20], [30, 46, 33, 37], [46, 56, 46, 50]
     --> [0, ...                                               , 63, ...  ]
     '''
-    print("before refine", level_alloc)
+    # print("before refine", level_alloc)
     for i in range(1, len(level_alloc)):
         assert level_alloc[i - 1][1] <= level_alloc[i][0] 
         merge = int((level_alloc[i - 1][1] + level_alloc[i][0]) / 2)
