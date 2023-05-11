@@ -1,7 +1,7 @@
 import dala
 import numpy
 
-outfile = "../ember_capacity/dala"
+outfile = "../ember_capacity/ours"
 
 def decide_end_level(point, level_alloc):
     for i in range(len(level_alloc)):
