@@ -1,4 +1,6 @@
 from scipy.special import comb
+import pickle
+import math
 import numpy as np
 import pprint
 import os
@@ -128,12 +130,12 @@ def report_improve(ecc_res):
 
     pprint.pprint(res)
 
-# obtained from simulation.py
+# obtained from trans.py
 raw_ber = {\
-'ours4' : 1-0.999080882352941,
-'ours8' : 1-0.982664233576642,
-'SBA4' : 1-0.998161764705882,
-'SBA8' : 1-0.972171532846715,
+'ours4' : 0.002688172043010753,
+'ours8' : 0.023788767502217794,
+'SBA4' : 0.009267383198069752,
+'SBA8' : 0.033796296296296297,
 }
 error_spec = 1e-14
 
