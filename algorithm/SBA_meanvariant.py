@@ -94,7 +94,7 @@ def half(level_alloc):
 
 
 def minimal_BER(specified_levels, eps, low_BER = 0, high_BER = 1, double=False):
-    np.random.seed(123)
+    np.random.seed(1245)
     # rationale for double: for 4 levels with insufficient data to characterize the error
     #   we need to allocate 8 levels then half the levels
     if double:
