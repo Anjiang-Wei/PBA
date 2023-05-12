@@ -42,11 +42,11 @@ ecc = \
 
 def to_percent(x, full_percenet=False):
     if x == 1 or full_percenet:
-        return "100\%"
-    return ("%.2g" % (x * 100)) + "\%"
+        return "100%"
+    return ("%.2g" % (x * 100)) + "%"
 
 def compute_overhead(x):
-    return "%.2g" % ((x-1) * 100) + "\%"
+    return "%.2g" % ((x-1) * 100) + "%"
 
 def table1():
     # Technique	Chip	# Levels	Drift Error Rate	Drift Reduction
