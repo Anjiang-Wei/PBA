@@ -62,7 +62,7 @@ def extract_overhead(list):
 def table2():
     # Technique	Chip	Bits-Per-Cell	Bit Error Rate	ECC Overhead	Improvement
     print(f'\sba,\emberchip,2,{to_percent(raw_ber["SBA4"])},{extract_overhead(ecc["SBA4"])},--')
-    print(f'\\tool,\emberchip,2,{to_percent(raw_ber["ours4"])},{extract_overhead(ecc["ours4"])},{to_percent(ecc["Reduction_in_Overhead_Ratio_4"], True)}')
+    print(f'\\tool,\emberchip,2,{to_percent(raw_ber["ours4"])},0%,100%')
     print(f'\sba,\emberchip,3,{to_percent(raw_ber["SBA8"])},{extract_overhead(ecc["SBA8"])},--')
     print(f'\\tool,\emberchip,3,{to_percent(raw_ber["ours8"])},{extract_overhead(ecc["ours8"])},{to_percent(ecc["Reduction_in_Overhead_Ratio_8"])}')
 
