@@ -66,8 +66,17 @@ def table2():
     print(f'\sba,\emberchip,3,{to_percent(raw_ber["SBA8"])},{extract_overhead(ecc["SBA8"])},--')
     print(f'\\tool,\emberchip,3,{to_percent(raw_ber["ours8"])},{extract_overhead(ecc["ours8"])},{to_percent(ecc["Reduction_in_Overhead_Ratio_8"])}')
 
+
+def table3():
+    # Technique	Chip	# Levels	Drift Error Rate	Improv. w.r.t \toolsigma
+    for i in range(4, 9):
+        print(f"\\toolsigma,\emberchip,{i},{to_percent(sba_our_search[i])},--")
+        print(f"\\toolnormal,\emberchip,{i},{to_percent(sba_our_search_mean[i])},{to_percent((sba_our_search[i] - sba_our_search_mean[i]) / sba_our_search[i])}")
+        print(f"\\tooleval,\emberchip,{i},{to_percent(our_res[i])},{to_percent((sba_our_search[i] - our_res[i]) / sba_our_search[i])}")
+
 if __name__ == "__main__":
     table1()
     print("\n\n")
     table2()
-
+    print("\n\n")
+    table3()
