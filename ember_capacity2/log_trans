@@ -1,0 +1,42 @@
+trans.py:47: RuntimeWarning: invalid value encountered in double_scalars
+  reduce_list.append((sba[i] - our[i]) / sba[i])
+trans.py:104: RuntimeWarning: invalid value encountered in double_scalars
+  print(f"BER reduction for level{hint[i]} =", (sba[i] - our[i]) / sba[i])
+our_res = \
+{4: 0.0,
+ 5: 0.0014705882352941124,
+ 6: 0.00735294117647058,
+ 7: 0.0015756302521008347,
+ 8: 0.011029411764705871}
+sba_res = \
+{4: 0.0,
+ 5: 0.003676470588235281,
+ 6: 0.005514705882352922,
+ 7: 0.016281512605042008,
+ 8: 0.021139705882352935}
+sba_our_search = \
+{4: 0.0,
+ 5: 0.002941176470588225,
+ 6: 0.006740196078431367,
+ 7: 0.01628151260504202,
+ 8: 0.028952205882352935}
+sba_our_search_mean = \
+{4: 0.0,
+ 5: 0.0014705882352941124,
+ 6: 0.0030637254901960675,
+ 7: 0.010504201680672263,
+ 8: 0.02389705882352941}
+Overall Drift Reduction [nan, 0.6, -0.33333333333333665, 0.9032258064516132, 0.4782608695652178]
+Overall Average Drift Reduction nan
+RDR Drift Reduction [nan, 0.5, -0.09090909090909066, 0.9032258064516133, 0.6190476190476194]
+RDR Average Drift Reduction nan
+Non-Normal Drift Reduction [nan, 0.0, -1.400000000000006, 0.8500000000000004, 0.5384615384615389]
+Non-Normal Average Drift Reduction nan
+raw_ber = {\
+'ours4' : 0.0,
+'ours8' : 0.0036764705882352936,
+'SBA4' : 0.0,
+'SBA8' : 0.0070465686274509805,
+}
+BER reduction for level4 = nan
+BER reduction for level8 = 0.47826086956521746
