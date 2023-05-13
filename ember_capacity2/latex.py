@@ -50,11 +50,11 @@ def compute_overhead(x):
 
 def table1():
     # Technique	Chip	# Levels	Drift Error Rate	Drift Reduction
-    print(f'\sba,\emberchip2,4,0%,--')
-    print(f'\\tool,\emberchip2,4,0%,0%')
+    print(f'\sba,\emberchiptwo,4,0%,--')
+    print(f'\\tool,\emberchiptwo,4,0%,0%')
     for i in range(5, 9):
-        print(f"\sba,\emberchip2,{i},{to_percent(sba_res[i])},--")
-        print(f"\\tool,\emberchip2,{i},{to_percent(our_res[i])},{to_percent((sba_res[i] - our_res[i]) / sba_res[i])}")
+        print(f"\sba,\emberchiptwo,{i},{to_percent(sba_res[i])},--")
+        print(f"\\tool,\emberchiptwo,{i},{to_percent(our_res[i])},{to_percent((sba_res[i] - our_res[i]) / sba_res[i])}")
 def extract_overhead(list):
     # input: ['RS', 1.0459770114942528, 455, 435, 21, 9, 6.146415343283516e-16]
     # output: 455 / 435
@@ -63,18 +63,18 @@ def extract_overhead(list):
 
 def table2():
     # Technique	Chip	Bits-Per-Cell	Bit Error Rate	ECC Overhead	Improvement
-    print(f'\sba,\emberchip2,2,0%,0%,--')
-    print(f'\\tool,\emberchip2,2,0%,0%,0%')
-    print(f'\sba,\emberchip2,3,{to_percent(raw_ber["SBA8"])},{extract_overhead(ecc["SBA8"])},--')
-    print(f'\\tool,\emberchip2,3,{to_percent(raw_ber["ours8"])},{extract_overhead(ecc["ours8"])},{to_percent(ecc["Reduction_in_Overhead_Ratio_8"])}')
+    print(f'\sba,\emberchiptwo,2,0%,0%,--')
+    print(f'\\tool,\emberchiptwo,2,0%,0%,0%')
+    print(f'\sba,\emberchiptwo,3,{to_percent(raw_ber["SBA8"])},{extract_overhead(ecc["SBA8"])},--')
+    print(f'\\tool,\emberchiptwo,3,{to_percent(raw_ber["ours8"])},{extract_overhead(ecc["ours8"])},{to_percent(ecc["Reduction_in_Overhead_Ratio_8"])}')
 
 
 def table3():
     # Technique	Chip	# Levels	Drift Error Rate	Improv. w.r.t \toolsigma
     for i in range(4, 9):
-        print(f"\\toolsigma,\emberchip2,{i},{to_percent(sba_our_search[i])},--")
-        print(f"\\toolnormal,\emberchip2,{i},{to_percent(sba_our_search_mean[i])},{to_percent((sba_our_search[i] - sba_our_search_mean[i]) / sba_our_search[i]) if sba_our_search[i] != 0 else '0%'}")
-        print(f"\\tooleval,\emberchip2,{i},{to_percent(our_res[i])},{to_percent((sba_our_search[i] - our_res[i]) / sba_our_search[i]) if sba_our_search[i] != 0 else '0%'}")
+        print(f"\\toolsigma,\emberchiptwo,{i},{to_percent(sba_our_search[i])},--")
+        print(f"\\toolnormal,\emberchiptwo,{i},{to_percent(sba_our_search_mean[i])},{to_percent((sba_our_search[i] - sba_our_search_mean[i]) / sba_our_search[i]) if sba_our_search[i] != 0 else '0%'}")
+        print(f"\\tooleval,\emberchiptwo,{i},{to_percent(our_res[i])},{to_percent((sba_our_search[i] - our_res[i]) / sba_our_search[i]) if sba_our_search[i] != 0 else '0%'}")
 
 if __name__ == "__main__":
     table1()
