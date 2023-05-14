@@ -14,7 +14,7 @@ def merged(d1, d2):
     assert d1.keys() == d2.keys()
     res = {}
     for k in d1.keys():
-        res[k] = d1[k] + d2[k]
+        res[k] = sorted(d1[k] + d2[k])
     return res
 
 def dump_model(distributions, filename):
