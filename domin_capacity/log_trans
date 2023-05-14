@@ -1,0 +1,26 @@
+trans.py:47: RuntimeWarning: invalid value encountered in double_scalars
+  reduce_list.append((sba[i] - our[i]) / sba[i])
+trans.py:104: RuntimeWarning: invalid value encountered in double_scalars
+  print(f"BER reduction for level{hint[i]} =", (sba[i] - our[i]) / sba[i])
+our_res = \
+{4: 0.0,
+ 5: 0.008823529411764697,
+ 6: 0.0018382352941176405,
+ 7: 0.005777310924369727,
+ 8: 0.01930147058823528}
+sba_res = \
+{4: 0.0,
+ 5: 0.00588235294117645,
+ 6: 0.009803921568627453,
+ 7: 0.0236344537815126,
+ 8: 0.025275735294117654}
+Overall Drift Reduction [nan, -0.5000000000000039, 0.8125000000000007, 0.7555555555555564, 0.2363636363636371]
+Overall Average Drift Reduction nan
+raw_ber = {\
+'ours4' : 0.0,
+'ours8' : 0.006433823529411765,
+'SBA4' : 0.0,
+'SBA8' : 0.008578431372549019,
+}
+BER reduction for level4 = nan
+BER reduction for level8 = 0.24999999999999986

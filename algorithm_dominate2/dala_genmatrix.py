@@ -1,7 +1,7 @@
 import dala
 import numpy
 
-outfile = "../bothcapacity2/ours"
+outfile = "../domin_capacity2/ours"
 
 distributions = {}
 def init_model():

@@ -1,7 +1,7 @@
 import SBA
 import numpy
 
-outfile = "../bothcapacity2/SBA"
+outfile = "../domin_capacity2/SBA"
 
 distributions = {}
 def init_model():
