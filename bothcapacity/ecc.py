@@ -133,7 +133,7 @@ def report_improve(ecc_res):
 # obtained from trans.py
 raw_ber = {\
 'ours4' : 0.0,
-'ours8' : 0.006348720043572985,
+'ours8' : 0.004553036492374728,
 'SBA4' : 0.0009191176470588235,
 'SBA8' : 0.006246595860566449,
 }
