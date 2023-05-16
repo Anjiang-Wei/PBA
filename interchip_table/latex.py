@@ -82,19 +82,34 @@ def fill_dict():
     filldata("equal", equal)
     filldata("biased", biased)
 
-def compute_reduction(now, original):
-    return "%.2g" % (((original - now) / original) * 100) + "%"
+def compute_comparison(now, original):
+    val = original - now
+    if val > 0:
+        return "+" + "%.2g" % (val * 100) + "%"
+    elif val < 0:
+        val = -val
+        return "-" + "%.2g" % (val * 100) + "%"
+    else:
+        return "0%"
+
+def to_percent(x, full_percenet=False):
+    if x == 1 or full_percenet:
+        return "100%"
+    return ("%.2g" % (x * 100)) + "%"
+
+def compute_overhead(x):
+    return "%.3g" % ((x-1) * 100) + "%"
 
 def report(res, techstr):
     # Technique	Dataset	Chip	3bpc BER	Overhead	Comparison
-    print(f"{techstr},same,\emberchip,{res['same'][0][0]},{res['same'][0][1]},--")
-    print(f"{techstr},other,\emberchip,{res['other'][0][0]},{res['other'][0][1]},{compute_reduction(res['other'][0][1], res['same'][0][1])}")
-    print(f"{techstr},equal,\emberchip,{res['equal'][0][0]},{res['equal'][0][1]},{compute_reduction(res['equal'][0][1], res['same'][0][1])}")
-    print(f"{techstr},biased,\emberchip,{res['biased'][0][0]},{res['biased'][0][1]},{compute_reduction(res['biased'][0][1], res['same'][0][1])}")
-    print(f"{techstr},same,\emberchiptwo,{res['same'][0][0]},{res['same'][1][1]},--")
-    print(f"{techstr},other,\emberchiptwo,{res['other'][0][0]},{res['other'][1][1]},{compute_reduction(res['other'][1][1], res['same'][1][1])}")
-    print(f"{techstr},equal,\emberchiptwo,{res['equal'][0][0]},{res['equal'][1][1]},{compute_reduction(res['equal'][1][1], res['same'][1][1])}")
-    print(f"{techstr},biased,\emberchiptwo,{res['biased'][0][0]},{res['biased'][1][1]},{compute_reduction(res['biased'][1][1], res['same'][1][1])}")
+    print(f"{techstr},same,\emberchip,{to_percent(res['same'][0][0])},{compute_overhead(res['same'][0][1])},--")
+    print(f"{techstr},other,\emberchip,{to_percent(res['other'][0][0])},{compute_overhead(res['other'][0][1])},{compute_comparison(res['other'][0][1], res['same'][0][1])}")
+    print(f"{techstr},equal,\emberchip,{to_percent(res['equal'][0][0])},{compute_overhead(res['equal'][0][1])},{compute_comparison(res['equal'][0][1], res['same'][0][1])}")
+    print(f"{techstr},biased,\emberchip,{to_percent(res['biased'][0][0])},{compute_overhead(res['biased'][0][1])},{compute_comparison(res['biased'][0][1], res['same'][0][1])}")
+    print(f"{techstr},same,\emberchiptwo,{to_percent(res['same'][0][0])},{compute_overhead(res['same'][1][1])},--")
+    print(f"{techstr},other,\emberchiptwo,{to_percent(res['other'][0][0])},{compute_overhead(res['other'][1][1])},{compute_comparison(res['other'][1][1], res['same'][1][1])}")
+    print(f"{techstr},equal,\emberchiptwo,{to_percent(res['equal'][0][0])},{compute_overhead(res['equal'][1][1])},{compute_comparison(res['equal'][1][1], res['same'][1][1])}")
+    print(f"{techstr},biased,\emberchiptwo,{to_percent(res['biased'][0][0])},{compute_overhead(res['biased'][1][1])},{compute_comparison(res['biased'][1][1], res['same'][1][1])}")
 
 if __name__ == "__main__":
     fill_dict()
