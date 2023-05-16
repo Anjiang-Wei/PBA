@@ -116,4 +116,4 @@ if __name__ == "__main__":
     pprint.pprint(ours_res)
     pprint.pprint(sba_res)
     report(sba_res, "\sba")
-    report(ours_res, "\ours")
+    report(ours_res, "\\tool")
