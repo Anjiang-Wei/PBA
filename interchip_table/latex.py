@@ -82,8 +82,23 @@ def fill_dict():
     filldata("equal", equal)
     filldata("biased", biased)
 
+def compute_reduction(now, original):
+    return "%.2g" % (((original - now) / original) * 100) + "%"
+
+def report(res, techstr):
+    # Technique	Dataset	Chip	3bpc BER	Overhead	Comparison
+    print(f"{techstr},same,\emberchip,{res['same'][0][0]},{res['same'][0][1]},--")
+    print(f"{techstr},other,\emberchip,{res['other'][0][0]},{res['other'][0][1]},{compute_reduction(res['other'][0][1], res['same'][0][1])}")
+    print(f"{techstr},equal,\emberchip,{res['equal'][0][0]},{res['equal'][0][1]},{compute_reduction(res['equal'][0][1], res['same'][0][1])}")
+    print(f"{techstr},biased,\emberchip,{res['biased'][0][0]},{res['biased'][0][1]},{compute_reduction(res['biased'][0][1], res['same'][0][1])}")
+    print(f"{techstr},same,\emberchiptwo,{res['same'][0][0]},{res['same'][1][1]},--")
+    print(f"{techstr},other,\emberchiptwo,{res['other'][0][0]},{res['other'][1][1]},{compute_reduction(res['other'][1][1], res['same'][1][1])}")
+    print(f"{techstr},equal,\emberchiptwo,{res['equal'][0][0]},{res['equal'][1][1]},{compute_reduction(res['equal'][1][1], res['same'][1][1])}")
+    print(f"{techstr},biased,\emberchiptwo,{res['biased'][0][0]},{res['biased'][1][1]},{compute_reduction(res['biased'][1][1], res['same'][1][1])}")
 
 if __name__ == "__main__":
     fill_dict()
     pprint.pprint(ours_res)
     pprint.pprint(sba_res)
+    report(sba_res, "\sba")
+    report(ours_res, "\ours")
