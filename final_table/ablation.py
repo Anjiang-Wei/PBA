@@ -157,7 +157,7 @@ def to_percent(x):
         return "-100%"
     if x == 'N/A':
         return "N/A"
-    if x == 0:
+    if x == 0 or abs(x*100) < 0.01:
         return "0%"
     return ("%.2g" % (x * 100)) + "%"
 
