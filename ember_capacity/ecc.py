@@ -136,12 +136,14 @@ raw_ber = {\
 'ours8' : 0.003795615468409586,
 'SBA4' : 0.00045955882352941176,
 'SBA8' : 0.007421023965141612,
+'norm4' : 0.00045955882352941176,
+'norm8' : 0.007352941176470587,
 }
 error_spec = 1e-14
 
 if __name__ == "__main__":
-    report_improve(bestcode_dict(allcode(), error_spec, raw_ber, 1e10, 1e10))
-    print("Add Constraints")
-    for i in range(7, 14):
+    # report_improve(bestcode_dict(allcode(), error_spec, raw_ber, 1e10, 1e10))
+    # print("Add Constraints")
+    for i in range(12, 13):
         print("No bigger than", 2**i)
         report_improve(bestcode_dict(allcode(), error_spec, raw_ber, 2**i, 2**i))

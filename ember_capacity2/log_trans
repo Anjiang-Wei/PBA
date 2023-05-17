@@ -1,6 +1,6 @@
-trans.py:47: RuntimeWarning: invalid value encountered in double_scalars
+trans.py:47: RuntimeWarning: invalid value encountered in scalar divide
   reduce_list.append((sba[i] - our[i]) / sba[i])
-trans.py:104: RuntimeWarning: invalid value encountered in double_scalars
+trans.py:107: RuntimeWarning: invalid value encountered in scalar divide
   print(f"BER reduction for level{hint[i]} =", (sba[i] - our[i]) / sba[i])
 our_res = \
 {4: 0.0,
@@ -37,6 +37,8 @@ raw_ber = {\
 'ours8' : 0.0036764705882352936,
 'SBA4' : 0.0,
 'SBA8' : 0.0070465686274509805,
+'norm4' : 0.0,
+'norm8' : 0.007965686274509803,
 }
 BER reduction for level4 = nan
 BER reduction for level8 = 0.47826086956521746

@@ -120,6 +120,6 @@ if __name__ == "__main__":
     print("raw_ber = {\\")
     ours_ber = report_ber("ours", [4, 8])
     sba_ber = report_ber("SBA", [4, 8])
-    sba_ber = report_ber("SBAmeanvar", [4, 8], hint="norm")
+    norm_ber = report_ber("SBAmeanvar", [4, 8], hint="norm")
     print("}")
     report_ber_reduction(ours_ber, sba_ber, ["4", "8"])

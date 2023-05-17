@@ -36,5 +36,5 @@ raw_ber = {\
 'norm4' : 0.005050505050505051,
 'norm8' : 0.035668731127599905,
 }
-BER reduction for level4 = 0.467741935483871
-BER reduction for level8 = 0.33306381387336714
+BER reduction for level4 = 0.709931920850035
+BER reduction for level8 = 0.2961131807562954
