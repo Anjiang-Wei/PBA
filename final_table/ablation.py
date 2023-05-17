@@ -120,15 +120,20 @@ def filldata(dataset_str, path):
     chip_ecc_ours_8 -= 1
     chip_ecc_SBA_8 -= 1
     chip_ecc_norm_8 -= 1
-    # TODO: use delta_our_ber
     ours_res[dataset_str] = list_to_percent([[chip_ber_ours_4, chip_ecc_ours_4], 
                             [chip_ber_ours_8, chip_ecc_ours_8]])
     sba_res[dataset_str] = list_to_percent([[chip_ber_SBA_4, chip_ecc_SBA_4],
                             [chip_ber_SBA_8, chip_ecc_SBA_8]])
-    delta_ber[dataset_str] = list_to_percent([compute_abs_rel(chip_ber_ours_4, chip_ber_SBA_4),
-                            compute_abs_rel(chip_ber_ours_8, chip_ber_SBA_8)])
-    delta_ecc[dataset_str] = list_to_percent([compute_abs_rel(chip_ecc_ours_4, chip_ecc_SBA_4),
-                            compute_abs_rel(chip_ecc_ours_8, chip_ecc_SBA_8)])
+    norm_res[dataset_str] = list_to_percent([[chip_ber_norm_4, chip_ecc_norm_4],
+                            [chip_ber_norm_8, chip_ecc_norm_8]])
+    delta_our_ber[dataset_str] = list_to_percent([compute_abs_rel(chip_ber_ours_4, chip_ber_norm_4),
+                            compute_abs_rel(chip_ber_ours_8, chip_ber_norm_8)])
+    delta_our_ecc[dataset_str] = list_to_percent([compute_abs_rel(chip_ecc_ours_4, chip_ecc_norm_4),
+                            compute_abs_rel(chip_ecc_ours_8, chip_ecc_norm_8)])
+    delta_sba_ber[dataset_str] = list_to_percent([compute_abs_rel(chip_ber_SBA_4, chip_ber_norm_4),
+                            compute_abs_rel(chip_ber_SBA_8, chip_ber_norm_8)])
+    delta_sba_ecc[dataset_str] = list_to_percent([compute_abs_rel(chip_ecc_SBA_4, chip_ecc_norm_4),
+                            compute_abs_rel(chip_ecc_SBA_8, chip_ecc_norm_8)])
 
 def fill_dict():
     filldata("originalchip", originalchip)
@@ -162,12 +167,12 @@ def compute_fstr(x,bpc_idx):
     # bpc_idx = 0 : 2bpc
     # bpc_idx = 1 : 3bpc
     #' \
-    str1 = f'\{x},{bpc},{sba_res[x][bpc_idx][0]},{ours_res[x][bpc_idx][0]},{delta_ber[x][bpc_idx][0]},{delta_ber[x][bpc_idx][1]},' \
-                + f'{sba_res[x][bpc_idx][1]},{ours_res[x][bpc_idx][1]},{delta_ecc[x][bpc_idx][0]},{delta_ecc[x][bpc_idx][1]}'
+    str1 = f'\{x},{bpc},{norm_res[x][bpc_idx][0]},{sba_res[x][bpc_idx][0]},{delta_sba_ber[x][bpc_idx][0]},{ours_res[x][bpc_idx][0]},{delta_our_ber[x][bpc_idx][0]},' \
+                    + f'{norm_res[x][bpc_idx][1]},{sba_res[x][bpc_idx][1]},{delta_sba_ecc[x][bpc_idx][0]},{ours_res[x][bpc_idx][1]},{delta_our_ecc[x][bpc_idx][0]}'
     return str1
 
 def report():
-    # Hardware	BPC	sba	dala	delta BER	Rel. delta BER	sba	dala	delta ECC	Rel. delta ECC
+    # Hardware	BPC	dala_norm	sba	delta_ber	dala	delta_ber	dala_norm	sba	delta ECC	dala	delta ECC
     print(compute_fstr("originalchip", 0))
     print(compute_fstr("originalchip", 1))
     print(compute_fstr("emberchip", 0))
@@ -180,6 +185,5 @@ if __name__ == "__main__":
     fill_dict()
     pprint.pprint(ours_res)
     pprint.pprint(sba_res)
-    pprint.pprint(delta_ber)
-    pprint.pprint(delta_ecc)
+    # pprint.pprint(delta_our_ber)
     report()
