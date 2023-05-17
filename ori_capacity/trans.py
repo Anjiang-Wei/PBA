@@ -76,7 +76,7 @@ def init_dist():
     # pprint.pprint(dist_4)
     # pprint.pprint(dist_8)
 
-def report_ber(filename_prefix, level_list):
+def report_ber(filename_prefix, level_list, hint=None):
     res = []
     for i in level_list:
         dist = 0
@@ -94,7 +94,10 @@ def report_ber(filename_prefix, level_list):
         ber_matrix = np.multiply(matrix, dist) / i
         # pprint.pprint(ber_matrix)
         ber_avg = np.sum(ber_matrix) / num_bits
-        print("'" + filename_prefix + str(i) + "' :", str(ber_avg)+",")
+        if hint is None:
+            print("'" + filename_prefix + str(i) + "' :", str(ber_avg)+",")
+        else:
+            print("'" + hint + str(i) + "' :", str(ber_avg)+",")
         res.append(ber_avg)
     return res
 
@@ -117,5 +120,6 @@ if __name__ == "__main__":
     print("raw_ber = {\\")
     ours_ber = report_ber("ours", [4, 8])
     sba_ber = report_ber("SBA", [4, 8])
+    sba_ber = report_ber("SBAmeanvar", [4, 8], hint="norm")
     print("}")
     report_ber_reduction(ours_ber, sba_ber, ["4", "8"])
