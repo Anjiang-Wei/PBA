@@ -1,7 +1,8 @@
 import SBA
 import numpy
 
-outfile = "../ember_capacity/SBA"
+outfile = "../ember_avail/"
+whos = "SBA"
 
 def decide_end_level(point, level_alloc):
     for i in range(len(level_alloc)):
@@ -27,14 +28,13 @@ def simulate_error(level_alloc):
     return P
 
 def get_dala():
-    SBA.init_model()
     res = SBA.minimal_BER(1.8, 6, 0.1)
     return res
 
-def simulate_all_levels(dala_allocs):
-    for i in range(4, 9):
+def simulate_all_levels(dala_allocs, percnum):
+    for i in [8]:
         P = simulate_error(dala_allocs[i])
-        dump_matrix(P, outfile)
+        dump_matrix(P, outfile + str(int(percnum)) + "/" + whos)
 
 def dump_matrix(matrix, hint):
     num_level = len(matrix)
@@ -44,7 +44,18 @@ def dump_matrix(matrix, hint):
             to_write.append(",".join(map(str, matrix[i])) + "\n")
         fout.writelines(to_write)
 
-if __name__ == "__main__":
-    SBA.init_model()
+def gen(perc):
+    print(perc)
+    SBA.distributions = {}
+    SBA.init_model(perc)
     dala_allocs = get_dala()
-    simulate_all_levels(dala_allocs)
+    SBA.init_model()
+    simulate_all_levels(dala_allocs,100*perc)
+
+if __name__ == "__main__":
+    # gen(0.1)
+    gen(0.25)
+    gen(0.5)
+    gen(0.75)
+    gen(0.9)
+    # gen(1.0)

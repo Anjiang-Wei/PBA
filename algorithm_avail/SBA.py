@@ -2,16 +2,22 @@ import json
 import numpy as np
 import pprint
 from scipy.stats import norm
+import random
+from random import sample
+import math
 
 date="May2"
 
 distributions = {}
-def init_model():
+def init_model(perc=None):
+    random.seed(123)
     with open("../model/retention1s.csv", "r") as f:
         lines = f.readlines()
         for line in lines:
             tokens = line.split(',')
             tmin, tmax, distr = int(tokens[0]), int(tokens[1]), list(map(int, tokens[2:]))
+            if perc is not None:
+                distr = sorted(sample(distr, int(perc * len(distr))) * math.ceil(1/perc))
             distributions[(tmin, tmax)] = distr
     # print(distributions)
 
