@@ -10,14 +10,14 @@ DEBUG = False
 
 distributions = {}
 def init_model(perc=None):
-    random.seed(1)
+    random.seed(134)
     with open("../model/retention1s.csv", "r") as f:
         lines = f.readlines()
         for line in lines:
             tokens = line.split(',')
             tmin, tmax, distr = int(tokens[0]), int(tokens[1]), list(map(int, tokens[2:]))
             if perc is not None:
-                distr = sorted(sample(distr, int(perc * len(distr))) * math.ceil(1/perc))
+                distr = sorted(sample(distr, int(perc * len(distr))))
             distributions[(tmin, tmax)] = distr
     # print(distributions)
 
