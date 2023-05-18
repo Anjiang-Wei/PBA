@@ -51,5 +51,75 @@ ecc2={\
 '100/SBA8': 1.117936117936118,
 }
 
+def to_percent(x):
+    if x == 1:
+        return "100%"
+    if x == -1:
+        return "-100%"
+    if x == 'N/A':
+        return "N/A"
+    if x == 0:
+        return "0%"
+    return ("%.2g" % (x * 100)) + "%"
 
+def ber(idx,n,sba):
+    if idx == 1:
+        if sba == True:
+            return ber1[str(n)+"/SBA8"]
+        else:
+            return ber1[str(n)+"/ours8"]
+    else:
+        assert idx == 2
+        if sba == True:
+            return ber2[str(n)+"/SBA8"]
+        else:
+            return ber2[str(n)+"/ours8"]
 
+def berp(idx,n,sba):
+    return to_percent(ber(idx,n,sba))
+
+def delta_ber(idx,n):
+    if idx == 1:
+        return ber1[str(n)+"/ours8"] - ber1[str(n)+"/SBA8"]
+    else:
+        assert idx == 2
+        return ber2[str(n)+"/ours8"] - ber2[str(n)+"/SBA8"]
+
+def delta_berp(idx,n):
+    return to_percent(delta_ber(idx,n))
+
+def ecc(idx,n,sba):
+    if idx == 1:
+        if sba == True:
+            return ecc1[str(n)+"/SBA8"]-1
+        else:
+            return ecc1[str(n)+"/ours8"]-1
+    else:
+        assert idx == 2
+        if sba == True:
+            return ecc2[str(n)+"/SBA8"]-1
+        else:
+            return ecc2[str(n)+"/ours8"]-1
+
+def eccp(idx,n,sba):
+    return to_percent(ecc(idx,n,sba))
+
+def delta_ecc(idx,n):
+    if idx == 1:
+        return ecc1[str(n)+"/ours8"] - ecc1[str(n)+"/SBA8"]
+    else:
+        assert idx == 2
+        return ecc2[str(n)+"/ours8"] - ecc2[str(n)+"/SBA8"]
+
+def delta_eccp(idx,n):
+    return to_percent(delta_ecc(idx,n))
+
+def compute_fstr(n):
+    # dataset	SBA	DALA	delta_BER	SBA	DALA	delta_ECC	SBA	DALA	delta_BER	SBA	DALA	delta_ECC
+    str1 = f'{n}%,{berp(1,n,True)},{berp(1,n,False)},{delta_berp(1,n)},{eccp(1,n,True)},{eccp(1,n,False)},{delta_eccp(1,n)}' +\
+               f',{berp(2,n,True)},{berp(2,n,False)},{delta_berp(2,n)},{eccp(2,n,True)},{eccp(2,n,False)},{delta_eccp(2,n)}'
+    return str1
+
+if __name__ == "__main__":
+    for i in [25, 50, 75, 90, 100]:
+        print(compute_fstr(i))
