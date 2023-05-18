@@ -50,7 +50,7 @@ def gen(perc):
     SBA.init_model(perc)
     dala_allocs = get_dala()
     SBA.init_model()
-    simulate_all_levels(dala_allocs,100*perc)
+    simulate_all_levels(dala_allocs,int(100*perc))
 
 if __name__ == "__main__":
     # gen(0.1)
@@ -58,4 +58,4 @@ if __name__ == "__main__":
     gen(0.5)
     gen(0.75)
     gen(0.9)
-    # gen(1.0)
+    gen(1.0)
