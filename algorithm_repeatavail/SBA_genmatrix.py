@@ -57,7 +57,7 @@ def gen(perc, init_seed):
 
 if __name__ == "__main__":
     # gen(0.1)
-    start_seed=145
+    start_seed=180
     gen(0.25, start_seed)
     gen(0.5, start_seed)
     gen(0.75, start_seed)
