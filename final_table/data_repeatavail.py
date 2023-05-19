@@ -8,7 +8,7 @@ ber1 = {\
 '75/SBA' : [0.006827001633986927, 0.0005125293403494151],
 '90/ours' : [0.004202410130718954, 0.0002897220654831672],
 '90/SBA' : [0.00678359885620915, 0.0005202385208044458],
-'100/ours' : [0.0037956154684095854, 4.336808689942018e-19],
+'100/ours' : [0.0037956154684095854, 0],
 '100/SBA' : [0.007421023965141613, 0],
 }
 
@@ -76,6 +76,21 @@ def ber(idx,n,sba):
         else:
             return ber2[str(n)+"/ours"][0]
 
+def ber_sigma(idx,n,sba):
+    if idx == 1:
+        if sba == True:
+            return ber1[str(n)+"/SBA"][1]
+        else:
+            return ber1[str(n)+"/ours"][1]
+    else:
+        assert idx == 2
+        if sba == True:
+            return ber2[str(n)+"/SBA"][1]
+        else:
+            return ber2[str(n)+"/ours"][1]
+def ber_sigmap(idx,n,sba):
+    return to_percent(ber_sigma(idx,n,sba))
+
 def berp(idx,n,sba):
     return to_percent(ber(idx,n,sba))
 
@@ -85,6 +100,16 @@ def delta_ber(idx,n):
     else:
         assert idx == 2
         return ber2[str(n)+"/ours"][0] - ber2[str(n)+"/SBA"][0]
+
+def delta_ber_sigma(idx,n):
+    if idx == 1:
+        return ber1[str(n)+"/ours"][1] - ber1[str(n)+"/SBA"][1]
+    else:
+        assert idx == 2
+        return ber2[str(n)+"/ours"][1] - ber2[str(n)+"/SBA"][1]
+
+def delta_ber_sigmap(idx,n):
+    return to_percent(delta_ber_sigma(idx,n))
 
 def delta_berp(idx,n):
     return to_percent(delta_ber(idx,n))
@@ -117,8 +142,8 @@ def delta_eccp(idx,n):
 
 def compute_fstr(n):
     # dataset	SBA	DALA	delta_BER	SBA	DALA	delta_ECC	SBA	DALA	delta_BER	SBA	DALA	delta_ECC
-    str1 = f'{n}%,{berp(1,n,True)},{berp(1,n,False)},{delta_berp(1,n)},{eccp(1,n,True)},{eccp(1,n,False)},{delta_eccp(1,n)}' +\
-               f',{berp(2,n,True)},{berp(2,n,False)},{delta_berp(2,n)},{eccp(2,n,True)},{eccp(2,n,False)},{delta_eccp(2,n)}'
+    str1 = f'{n}%,{berp(1,n,True)},{berp(1,n,False)},{delta_berp(1,n)},{ber_sigmap(1,n,True)},{ber_sigmap(1,n,False)}' +\
+               f',{berp(2,n,True)},{berp(2,n,False)},{delta_berp(2,n)},{ber_sigmap(2,n,True)},{ber_sigmap(2,n,False)}'
     return str1
 
 if __name__ == "__main__":
